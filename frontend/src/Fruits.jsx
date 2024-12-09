@@ -311,6 +311,7 @@ const Fruits = () => {
                    '>
 
                     <h1 className='font-bold text-white text-2xl md:text-3xl text-center font-extrabold my-2'>Item List</h1>
+                    <h1 className='text-white text-center text-md md:text-2xl font-bold flex-wrap'>Count: {test.length}</h1>
                     {
                         test.length > 0 ? (
                             test.map((item, index) => (

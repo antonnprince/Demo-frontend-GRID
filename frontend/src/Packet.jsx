@@ -258,7 +258,7 @@ const Packet = () => {
                   ref={videoRef}
                   autoPlay
                   playsInline
-                  className="rounded-md server mr-auto w-1/2 md:w-1/4 md:h-5/6"
+                  className="rounded-md border border-white server mr-auto w-1/2 md:w-1/4 md:h-fit"
                 />
 
                 <div className='flex flex-col mx-auto w-3/4 space-y-4 '>
@@ -305,17 +305,18 @@ const Packet = () => {
                 </div>
 
                 <div className='flex flex-col md:flex-row'>
-                <img
-                  ref={receiveRef}
-                  className="bg-neutral-700 w-3/4 h-[500px] my-2 object-cover rounded-md border-2 w-screen flex flex-wrap"
-                />
+                  <img
+                    ref={receiveRef}
+                    className="bg-neutral-700 w-3/4 h-[500px] my-2 object-cover rounded-md border-2 w-screen flex flex-wrap"
+                  />
 
+                 
                   <div className='mx-auto sm:mx-2 md:ml-6 bg-neutral-700 w-full md:w-1/5 
                    rounded-xl shadow-lg overflow-y-auto item text-left
                    shadow-black p-2 h-[250px] md:h-[450px] my-auto 
                    '>
-
                     <h1 className='font-bold text-white text-2xl md:text-3xl text-center font-extrabold my-2'>Item List</h1>
+                    <h1 className='text-white text-center text-md md:text-2xl font-bold flex-wrap'>Count: {test.length}</h1>
                     {
                         test.length > 0 ? (
                             test.map((item, index) => (
