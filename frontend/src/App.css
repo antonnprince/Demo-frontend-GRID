@@ -1,8 +1,34 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; Prevents scrollbars if not needed */
+}
+
 #root {
-  width: 100vw; 
-  height: 100vh; 
-  margin: 0; 
-   padding: 0;  
+  min-height: 100vh; /* Ensures the root covers at least the full viewport height */
+  width: 100vw;
+  margin: 0;
+  padding: 0;
   text-align: center;
-  background-color: gray; /* Keeps the background color */
+  background-color: #1C1917; /* Keeps the background color */
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.item{
+  overflow-y: auto;
+  /* max-height: 400px; */
+}
+
+.server {
+  position: relative;
+  z-index: 20;
+}
+
+.img-overlay {
+  position: relative;
+  z-index: 10;
 }
