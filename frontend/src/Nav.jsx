@@ -4,7 +4,7 @@ const Nav=()=>{
     return(
         <nav className="bg-[#2563EB]" >
                 <ul className="text-white flex flex-row justify-center font-bold space-x-4 md:space-x-12  p-2 md:p-4
-                text-lg
+                text-md
                 md:text-xl
                 ">
                     <li>

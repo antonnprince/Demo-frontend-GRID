@@ -6,7 +6,15 @@ const Fruits = () => {
   const [showPrompt, setShowPrompt] = useState(true)
   const [cameraOn, setCameraOn] = useState(false);
   const canvasRef = useRef(null); 
-    const[items, setItems] = useState([])
+  const[items, setItems] = useState([])
+  const [isOn, setIsOn] = useState(false);
+
+
+    useEffect(()=>{
+        
+    })
+
+
     const test = [
       {
       'expiry':'10/02/34',
@@ -210,6 +218,10 @@ const Fruits = () => {
     }
   };
 
+  const toggle = () => {
+    setIsOn((prevState) => !prevState);
+  };
+
   
 
   return (
@@ -228,9 +240,7 @@ const Fruits = () => {
             onClick={()=>{startCamera(), setShowPrompt(!showPrompt)}} disabled={cameraOn}>
               Start Camera
             </button>
-            {/* <button className="bg-[#2563EB] w-40 rounded-full text-lg font-bold" onClick={stopCamera} disabled={!cameraOn}>
-              Stop Camera
-            </button> */}
+        
         </div>
       </div>
       }
@@ -240,48 +250,94 @@ const Fruits = () => {
         cameraOn &&
         
          <div className='flex flex-col md:flex-row'>
-            <div className="flex flex-col relative">
+            <div className="flex flex-col ">
+         
+              <div className='flex flex-row'>
                 <video
                   ref={videoRef}
                   autoPlay
                   playsInline
-                  className="border-2 border-white rounded-md server mr-auto w-1/2 md:w-1/4 md:h-fit"
+                  className="rounded-md server mr-auto w-1/2 md:w-1/4 md:h-fit"
                 />
-                
+
+                <div className='flex flex-col mx-auto w-3/4 space-y-4 '>
+                  <br />
+                  <div className='flex flex-row'>
+                  <br />
+                    <button 
+                    disabled={isOn}
+                    className="bg-[#2563EB] w-1/2 md:w-1/4 mx-1 md:mx-4 rounded-lg text-sm md:text-lg text-white font-bold">
+                      Sensor-On
+                    </button>
+                    <button
+                    disabled={isOn}
+                    className="bg-[#2563EB] w-1/2 md:w-1/4 mx-1 md:mx-4 rounded-lg text-sm md:text-lg text-white font-bold">
+                      Sensor-Off
+                    </button>
+                  </div>
+
+                  <div className='flex flex-row'>
+                    <button
+                    className="bg-[#2563EB] w-1/2 md:w-1/4 mx-1 md:mx-4 rounded-lg text-sm md:text-lg text-white font-bold">
+                      Reset
+                    </button>
+                    <button
+                    onClick={toggle}
+                    className={`px-2 py-2 text-white ml-4 w-1/2 md:w-1/4 text-xs md:text-lg font-bold rounded-lg transition-colors ${
+                      isOn ? 'bg-green-700' : 'bg-red-700'
+                    }`}
+                  >
+                    {isOn ? 'HARDWARE ON' : 'HARDWARE OFF'}
+                  </button>
+                  </div>
+
+                  <button className="bg-[#2563EB] w-1/2 mx-12 md:mx-6 
+                rounded-lg text-lg text-white font-bold" onClick={()=>(stopCamera(), setShowPrompt(!showPrompt))} disabled={!cameraOn}>
+                  Finish
+                </button>
+                </div>
+               
+                </div>
+
+                <div className='flex flex-col md:flex-row'>
                 <img
                   ref={receiveRef}
-                  className="bg-neutral-700  w-3/4 h-[500px] mb-24 img-overlay object-cover rounded-md border-2 w-screen flex flex-wrap"
+                  className="bg-neutral-700  w-3/4 h-[500px] my-2 object-cover rounded-md border-2 w-screen flex flex-wrap"
                 />
+
+                  <div className='mx-auto sm:mx-2 md:ml-6 bg-neutral-700 w-full md:w-1/5 
+                   rounded-xl shadow-lg overflow-y-auto item text-left
+                   shadow-black p-2 h-[250px] md:h-[450px] my-auto 
+                   '>
+
+                    <h1 className='font-bold text-white text-2xl md:text-3xl text-center font-extrabold my-2'>Item List</h1>
+                    {
+                        test.length > 0 ? (
+                            test.map((item, index) => (
+                              <div key={index+1} className='text-white font-semibold text-xl lg:text-2xl p-1'>
+                                <h1>
+                                  {index+1}.
+                                  {item['object_name']} 
+                                  </h1>
+                                <h1 className='ml-2'><span className='font-normal text-xl'>EXPIRY:</span> {item['expiry']}</h1>
+                                <h1 className='ml-2'><span className='font-normal text-xl'>MFG:</span>{item['mfg']}</h1>
+                                <h1 className='ml-2'><span className='font-normal text-xl'>BATCH NO:</span>{item['batch_no']}</h1>
+                              </div>
+                            )
+                          )
+                            ) : (
+                                <p className='text-xl my-2 text-white'>No items received yet.</p>
+                            )
+                    }
+
+                 
+                </div>
+                </div>
             </div>
 
             <canvas ref={canvasRef} style={{ display: 'none' }} />
 
-                <div className='mx-auto sm:mx-2 md:ml-6 bg-neutral-700 w-full md:w-1/5 
-                   rounded-xl shadow-lg overflow-y-auto item text-left
-                   shadow-black p-2 h-[250px] md:h-[400px] my-auto'>
-                    <h1 className='font-bold text-white text-2xl md:text-3xl text-center font-extrabold my-2'>Item List</h1>
-              {
-                   test.length > 0 ? (
-                      test.map((item, index) => (
-                        <div key={index+1} className='text-white font-semibold text-xl lg:text-2xl p-1'>
-                          <h1>
-                            {index+1}.
-                             {item['object_name']} 
-                            </h1>
-                          <h1 className='ml-2'><span className='font-normal text-xl'>EXPIRY:</span> {item['expiry']}</h1>
-                          <h1 className='ml-2'><span className='font-normal text-xl'>MFG:</span>{item['mfg']}</h1>
-                          <h1 className='ml-2'><span className='font-normal text-xl'>BATCH NO:</span>{item['batch_no']}</h1>
-                        </div>
-                      )
-                    )
-                       ) : (
-                           <p className='text-xl my-2 text-white'>No items received yet.</p>
-                       )
-              }
-              <button className="bg-[#2563EB] w-full rounded-full text-lg text-white font-bold" onClick={()=>(stopCamera(), setShowPrompt(!showPrompt))} disabled={!cameraOn}>
-              Finish
-            </button>
-         </div>
+               
           </div>
       }
     </div>
